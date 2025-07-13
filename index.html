@@ -5,7 +5,7 @@
 <title>Certificate Generator</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-  body { font-family: Arial, sans-serif; text-align: center; }
+  body { font-family: Arial, sans-serif; text-align: center; padding: 20px;}
   input, button { padding: 10px; margin: 10px; font-size: 16px; }
 </style>
 </head>
@@ -28,26 +28,25 @@ async function generateCertificate() {
     const doc = new jsPDF({
         orientation: 'landscape',
         unit: 'px',
-        format: [842, 595] // A4 size
+        format: [1086, 768] // match your image size
     });
 
-    const imgUrl = "https://YOUR_CANVA_BACKGROUND_LINK_HERE"; // Replace with your image URL
+    const imgUrl = "certificate-bg.png"; // local image file in same directory
 
-    // Load image
     const img = new Image();
     img.crossOrigin = "Anonymous";
     img.src = imgUrl;
 
     img.onload = function() {
-        doc.addImage(img, 'PNG', 0, 0, 842, 595);
+        doc.addImage(img, 'PNG', 0, 0, 1086, 768);
         doc.setFontSize(36);
-        doc.setTextColor(0, 0, 128);
-        doc.text(name, 421, 300, { align: 'center' }); // center of page
+        doc.setTextColor(0, 0, 0);
+        doc.text(name, 543, 400, { align: 'center' }); // position adjusted to your certificate
         doc.save("Certificate.pdf");
     };
 
     img.onerror = function() {
-        alert("Failed to load certificate background.");
+        alert("Could not load certificate background.");
     }
 }
 </script>
