@@ -28,26 +28,17 @@ async function generateCertificate() {
     const doc = new jsPDF({
         orientation: 'landscape',
         unit: 'px',
-        format: [1086, 768] // match your image size
+        format: [1086, 768]
     });
 
-    const imgUrl = "certificate-bg.png"; // local image file in same directory
+    const imgData = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." 
+    // (truncated for example, yours is very long)
 
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.src = imgUrl;
-
-    img.onload = function() {
-        doc.addImage(img, 'PNG', 0, 0, 1086, 768);
-        doc.setFontSize(36);
-        doc.setTextColor(0, 0, 0);
-        doc.text(name, 543, 400, { align: 'center' }); // position adjusted to your certificate
-        doc.save("Certificate.pdf");
-    };
-
-    img.onerror = function() {
-        alert("Could not load certificate background.");
-    }
+    doc.addImage(imgData, 'PNG', 0, 0, 1086, 768);
+    doc.setFontSize(36);
+    doc.setTextColor(0, 0, 0);
+    doc.text(name, 543, 400, { align: 'center' });
+    doc.save("Certificate.pdf");
 }
 </script>
 
