@@ -17,6 +17,16 @@
 <button onclick="generateCertificate()">Download Certificate</button>
 
 <script>
+async function getImageAsBase64(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    });
+}
+
 async function generateCertificate() {
     const name = document.getElementById("nameInput").value.trim();
     if (!name) {
@@ -24,14 +34,14 @@ async function generateCertificate() {
         return;
     }
 
+    const imgData = await getImageAsBase64("certificate-bg.png");
+
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({
         orientation: 'landscape',
         unit: 'px',
-        format: [1086, 768]  // match your Canva PNG
+        format: [1086, 768]
     });
-
-    const imgData = "data:image/png;base64,YOUR_BASE64_DATA_HERE";
 
     doc.addImage(imgData, 'PNG', 0, 0, 1086, 768);
     doc.setFontSize(36);
