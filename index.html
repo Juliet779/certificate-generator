@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Certificate Generator</title>
+<meta charset="UTF-8" />
+<title>Juliet E-Certificate Generator</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-  body { font-family: Arial, sans-serif; text-align: center; padding: 20px;}
+  body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
   input, button { padding: 10px; margin: 10px; font-size: 16px; }
 </style>
 </head>
 <body>
 
-<h2>🎉 Get Your Certificate 🎉</h2>
+<h2>🎉 Get Your E-Certificate 🎉</h2>
 <input type="text" id="nameInput" placeholder="Enter your name" />
 <br>
 <button onclick="generateCertificate()">Download Certificate</button>
@@ -28,10 +28,9 @@ async function generateCertificate() {
     const doc = new jsPDF({
         orientation: 'landscape',
         unit: 'px',
-        format: [1086, 768]  // Adjust to your PNG size
+        format: [1086, 768]  // match your Canva PNG
     });
 
-    // ✅ Your Base64 image data here (for example from Canva PNG)
     const imgData = "data:image/png;base64,YOUR_BASE64_DATA_HERE";
 
     doc.addImage(imgData, 'PNG', 0, 0, 1086, 768);
@@ -44,3 +43,4 @@ async function generateCertificate() {
 
 </body>
 </html>
+
